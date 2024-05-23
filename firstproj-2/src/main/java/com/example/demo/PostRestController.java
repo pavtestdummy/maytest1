@@ -17,8 +17,9 @@ public class PostRestController {
 		Post result=rc.get()
 		.uri(url)
 		.retrieve()
+		.onStatus(status->status.value()==404,(request,response)->{throw new RuntimeException("sorry");})
 		.body(Post.class);
-		
+		System.out.println();
 		System.out.println(result.getTitle());
 		return result;
 	
